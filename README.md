@@ -19,7 +19,7 @@ find . -type f | xargs sed -i 's/opinion/body/g'
 rm db/test.sqlite3によって、ファイルを削除してから実行する
 
 
-①root.rb
+1：root.rb
 ・add "end"
 ・before
 　resources :users,only: [:show,:index,:edit,:update]
@@ -32,7 +32,7 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
 　resources :books
 
 
-２controller
+２：controller
 ②-1:application_controller.rb
 ・#9 root_path
      user_path(current_user)
@@ -72,6 +72,19 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
   	render "edit"
  ・#38 add
     "end"
+
+
+３：models
+③−1：book.rb
+・#2 Fix
+	has_many :user
+	belongs_to :user
+③-2：user.rb
+・#7 Fix
+    belongs_to :books
+    has_many :books, dependent: :destroy
+・#12 add
+    validates :introduction, length: {maximum: 50}
 
 ③gem
 ・add bootstrap reference https://web-camp.io/magazine/archives/16848
