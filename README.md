@@ -111,9 +111,18 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
 	<% if @book.user == current_user %>
 	<% end %>
 
+②home
+②-1:top.html.erb
+・#11 delete s
+    <p><%=link_to "Log in", new_user_sessions_path, class: "btn btn-info col-xs-10 col-xs-offset-1" %></p>
+    <p><%=link_to "Log in", new_user_session_path, class: "btn btn-info col-xs-10 col-xs-offset-1" %></p>
 
-②layouts
-②-1:application.html.erb
+・#14 delete s
+	<p><%=link_to "Sign up", new_user_registrations_path, class: "btn btn-success col-xs-10 col-xs-offset-1" %></p>
+	<p><%=link_to "Sign up", new_user_registration_path, class: "btn btn-success col-xs-10 col-xs-offset-1" %></p>
+
+③layouts
+③-1:application.html.erb
 ・#42　add
 <!--       <p class="alert"><%= alert %></p>
     </div>
@@ -122,6 +131,26 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
         <%= yield %>
       </div>
     </main> -->
+
+④device
+④-1:registrations/new.html.erb
+    <%= f.name_field :name, autofocus: true, class: "name" %>
+    <%= f.text_field :name, autofocus: true, class: "name" %>
+
+⑤user
+⑤-1: index.html.erb
+・#1 add
+<!-- <div class="row">
+	<div class="col-xs-3"> -->
+⑤-2: show.html.erb
+・#1 add
+<!-- <div class="row">
+	<div class="col-xs-3"> -->
+・#24 add @
+  <% books.each do |book| %>
+  <% @books.each do |book| %>
+
+
 ５：gem
 ・add bootstrap
 　　reference https://web-camp.io/magazine/archives/16848
