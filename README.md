@@ -86,10 +86,34 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
 ・#12 add
     validates :introduction, length: {maximum: 50}
 
-③gem
-・add bootstrap reference https://web-camp.io/magazine/archives/16848
+４：view
+①books
+①-1:_newform.html.erb
+・#2 add
+<!-- <div class="error">
+	<% if book.errors.any? %>
+	<%= pluralize(book.errors.count, "error") %><span>prohibited this book from being saved:</span>
+	<ul>
+		<% book.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %> -->
+・#19 Fix
+	<%= f.label :body %> <!-- ここを変更 -->
+	<%= f.label :opinion %> <!-- ここを変更 -->
+①-2:show.html.erb
+・#6 add
+    <%= render 'users/profile' %>
+    <%= render 'users/profile',user:@user %>
+・#9 add
+	<%= render 'books/newform' %>
+	<%= render 'books/newform', book:@new_book %>
+・#27 and #31 add
+	<% if @book.user == current_user %>
+	<% end %>
 
-④layouts/application.html.erb
+
+②layouts
+②-1:application.html.erb
 ・#42　add
 <!--       <p class="alert"><%= alert %></p>
     </div>
@@ -98,3 +122,6 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
         <%= yield %>
       </div>
     </main> -->
+５：gem
+・add bootstrap
+　　reference https://web-camp.io/magazine/archives/16848
