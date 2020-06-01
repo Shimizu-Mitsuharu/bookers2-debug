@@ -32,8 +32,39 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
 　resources :books
 
 
-②users_controller.rb　
-・add "end"
+②controller
+2-1:application_controller.rb
+・#9 root_path
+     user_path(current_user)
+2-2:books_controller.rb
+・#2 add
+  before_action :baria_user, only: [:edit, :update]
+・#5 add
+  @new_book = Book.new
+  @user = @book.user
+・#11 add
+  @book = Book.new
+・#15 add
+  @book.user_id = current_user.id
+・#39 fix delete →　destory
+・#51 add
+  def baria_user
+	unless Book.find(params[:id]).user.id.to_i == current_user.id
+		redirect_to books_path
+	end
+ end
+・users_controller.rb
+add "end"
 
 ③gem
 ・add bootstrap reference https://web-camp.io/magazine/archives/16848
+
+④layouts/application.html.erb
+・#42　add
+<!--       <p class="alert"><%= alert %></p>
+    </div>
+    <main>
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main> -->

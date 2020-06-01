@@ -1,7 +1,9 @@
 class BooksController < ApplicationController
-
+  before_action :baria_user, only: [:edit, :update]
   def show
   	@book = Book.find(params[:id])
+    @new_book = Book.new
+    @user = @book.user
   end
 
   def index
@@ -10,7 +12,8 @@ class BooksController < ApplicationController
 
   def create
   	@book = Book.new(book_params) #Bookモデルのテーブルを使用しているのでbookコントローラで保存する。
-  	if @book.save #入力されたデータをdbに保存する。
+  	@book.user_id = current_user.id
+    if @book.save #入力されたデータをdbに保存する。
   		redirect_to @book, notice: "successfully created book!"#保存された場合の移動先を指定。
   	else
   		@books = Book.all
@@ -33,7 +36,7 @@ class BooksController < ApplicationController
   	end
   end
 
-  def delete
+  def destory
   	@book = Book.find(params[:id])
   	@book.destoy
   	redirect_to books_path, notice: "successfully delete book!"
@@ -45,4 +48,9 @@ class BooksController < ApplicationController
   	params.require(:book).permit(:title)
   end
 
+  def baria_user
+  unless Book.find(params[:id]).user.id.to_i == current_user.id
+    redirect_to books_path
+  end
+ end
 end
