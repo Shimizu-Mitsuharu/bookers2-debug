@@ -17,3 +17,7 @@ find . -type f | xargs sed -i 's/opinion/body/g'
 
 一回テストを試していると、テスト用のデータベースtest.sqlite3ができているため、カラム名を変更したのちに再びやる時は
 rm db/test.sqlite3によって、ファイルを削除してから実行する
+
+
+①root.rb add "end"
+
