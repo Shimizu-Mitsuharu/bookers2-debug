@@ -32,11 +32,12 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
 　resources :books
 
 
-②controller
-2-1:application_controller.rb
+２controller
+②-1:application_controller.rb
 ・#9 root_path
      user_path(current_user)
-2-2:books_controller.rb
+
+②-2:books_controller.rb
 ・#2 add
   before_action :baria_user, only: [:edit, :update]
 ・#5 add
@@ -46,15 +47,31 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
   @book = Book.new
 ・#15 add
   @book.user_id = current_user.id
-・#39 fix delete →　destory
+・#39 fix
+  delete →　destory
 ・#51 add
   def baria_user
 	unless Book.find(params[:id]).user.id.to_i == current_user.id
 		redirect_to books_path
 	end
  end
-・users_controller.rb
-add "end"
+
+②-3:home_controller.rb
+・#2 add
+  before_action :authenticate_user!, except: [:top, :about]
+
+②-4:users_controller.rb
+・#2 add　:edit,
+	before_action :baria_user, only: [:update]
+	before_action :baria_user, only: [:edit, :update]
+・#21 delete　users_path(・・・）
+    redirect_to users_path(@user), notice: "successfully updated user!"
+    redirect_to @user, notice: "successfully updated user!"
+・#23 Fix
+  	render "show"
+  	render "edit"
+ ・#38 add
+    "end"
 
 ③gem
 ・add bootstrap reference https://web-camp.io/magazine/archives/16848
