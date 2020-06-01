@@ -19,5 +19,21 @@ find . -type f | xargs sed -i 's/opinion/body/g'
 rm db/test.sqlite3によって、ファイルを削除してから実行する
 
 
-①root.rb add "end"
+①root.rb
+・add "end"
+・before
+　resources :users,only: [:show,:index,:edit,:update]
+　resources :books
+　devise_for :users
 
+  after
+　devise_for :users
+　resources :users,only: [:show,:index,:edit,:update]
+　resources :books
+
+
+②users_controller.rb　
+・add "end"
+
+③gem
+・add bootstrap reference https://web-camp.io/magazine/archives/16848
