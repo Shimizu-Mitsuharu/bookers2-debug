@@ -4,7 +4,7 @@
 
 <!-- エラーメッセージ表示-->
 <% if @user.errors.any? %>
-	<h3><%= @user.errors.count %>error occurrence</h3><!--エラーメッセ-->
+	<h3><%= pluralize(@user.errors.count, "error") %>prohibited this user from being saved:</h3>
 	<ul>
 		<% @user.errors.full_messages.each do |message| %>
 		<li><%= message %></li>
@@ -14,8 +14,8 @@
 <!-- エラーメッセージ表示-->
 
 <div class="field">
-	<%= f.label :title %>
-	<%= f.text_field :title, class: "name" %>
+	<%= f.label :name %>
+	<%= f.text_field :name, class: "name" %>
 </div>
 
 <div class="field">

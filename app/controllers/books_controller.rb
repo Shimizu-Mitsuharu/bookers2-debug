@@ -37,16 +37,16 @@ class BooksController < ApplicationController
   	end
   end
 
-  def destory
+  def destroy
   	@book = Book.find(params[:id])
-  	@book.destoy
+  	@book.destroy
   	redirect_to books_path, notice: "successfully delete book!"
   end
 
   private
 
   def book_params
-  	params.require(:book).permit(:title)
+    params.require(:book).permit(:title, :body)
   end
 
   def baria_user

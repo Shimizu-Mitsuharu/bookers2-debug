@@ -48,7 +48,10 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
 ・#15 add
   @book.user_id = current_user.id
 ・#39 fix
-  delete →　destory
+  delete →　destroy
+・#49 add
+  params.require(:book).permit(:title)
+  params.require(:book).permit(:title, :body)
 ・#51 add
   def baria_user
 	unless Book.find(params[:id]).user.id.to_i == current_user.id
@@ -100,7 +103,14 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
 ・#19 Fix
 	<%= f.label :body %> <!-- ここを変更 -->
 	<%= f.label :opinion %> <!-- ここを変更 -->
-①-2:show.html.erb
+
+
+①-2：index.html.erb
+・#1 add
+<!-- <div class="row">
+  <div class="col-xs-3"> -->
+
+①-3:show.html.erb
 ・#6 add
     <%= render 'users/profile' %>
     <%= render 'users/profile',user:@user %>
@@ -142,6 +152,13 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
 ・#1 add
 <!-- <div class="row">
 	<div class="col-xs-3"> -->
+・#8 add
+<%= render 'newform', book: @book %>
+<%= render 'books/newform', book: @book %>
+・#9 add
+<!--   </div>
+  <div class="col-xs-9">
+ -->
 ⑤-2: show.html.erb
 ・#1 add
 <!-- <div class="row">
@@ -150,6 +167,17 @@ rm db/test.sqlite3によって、ファイルを削除してから実行する
   <% books.each do |book| %>
   <% @books.each do |book| %>
 
+⑤-3:edit.html.erb
+・#17,18 Fix name
+  <%= f.label :title %>
+  <%= f.text_field :title, class: "name" %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: "name" %>
+
+４：devise.en.yml
+・#17 Fix
+  unauthenticated: "You need to sign in or sign up before continuing."
+  unauthenticated: "Signed out successfully"
 
 ５：gem
 ・add bootstrap
