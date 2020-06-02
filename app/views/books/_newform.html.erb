@@ -1,17 +1,19 @@
 <%= form_for(book) do |f| %>
-<!-- 追記 -->
-<div class="error">
-	<% if book.errors.any? %>
-	<%= pluralize(book.errors.count, "error") %><span>prohibited this book from being saved:</span>
-	<ul>
-		<% book.errors.full_messages.each do |message| %>
-		<li><%= message %></li>
+
+	<div class="error">
+		<% if book.errors.any? %>
+			<%= pluralize(book.errors.count, "error") %><span>prohibited this book from being saved:</span>
+
+			<ul>
+				<% book.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
 		<% end %>
-<!-- 追記ここまで -->
-	</ul>
-	<% end %>
+	</div>
+
 	<div class="field row">
-		<%= f.label :title %>
+			<%= f.label :title %>
 		<%= f.text_field :title, class: "col-xs-12 book_title" %>
 	</div>
 
